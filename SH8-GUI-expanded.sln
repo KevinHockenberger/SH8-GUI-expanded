@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.13.35818.85 d17.13
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SH8 GUI sample", "SH8-GUI-sample\SH8-GUI-sample.csproj", "{600599DB-813F-4592-9FD3-B1EFD738753E}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{600599DB-813F-4592-9FD3-B1EFD738753E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{600599DB-813F-4592-9FD3-B1EFD738753E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{600599DB-813F-4592-9FD3-B1EFD738753E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{600599DB-813F-4592-9FD3-B1EFD738753E}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {F3C581F2-6962-4B6E-8522-3E8E415603A5}
+	EndGlobalSection
+EndGlobal

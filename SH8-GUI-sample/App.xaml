@@ -1,0 +1,14 @@
+﻿<Application
+  x:Class="SH8_Sample.App"
+  xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+  xmlns:local="clr-namespace:SH8_Sample"
+  StartupUri="Views/MainWindow.xaml">
+  <Application.Resources>
+    <!--
+      this is a built-in converter that takes a boolean property and converts it to a visibilty setting
+      placing it here will make it global to the application
+    -->
+    <BooleanToVisibilityConverter x:Key="BoolToVis" />
+  </Application.Resources>
+</Application>

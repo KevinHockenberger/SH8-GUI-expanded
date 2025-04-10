@@ -1,0 +1,593 @@
+{
+    "engine": {
+        "imageSourceMgr": {
+            "__valueOrder": [
+                "fileA"
+            ],
+            "fileA": {
+                "acquired_lines": {
+                    "number": -1
+                },
+                "bytespp": {
+                    "number": 1
+                },
+                "create_id": "file",
+                "device": {
+                    "string": "n/a"
+                },
+                "driver": {
+                    "string": "n/a"
+                },
+                "driver_config": {
+                    "string": "n/a"
+                },
+                "driver_path": {
+                    "string": "n/a"
+                },
+                "file": {
+                    "string": "C:\\ProgramData\\Teledyne DALSA\\Sherlock8x64/images/default.bmp"
+                },
+                "height": {
+                    "number": 480
+                },
+                "name": "fileA",
+                "width": {
+                    "number": 640
+                }
+            }
+        },
+        "program": [
+            {
+                "data": {
+                    "children": [
+                        {
+                            "data": {
+                                "bytespp": {
+                                    "number": 1
+                                },
+                                "enabled": {
+                                    "bool": true
+                                },
+                                "height": {
+                                    "number": 480
+                                },
+                                "image_source": {
+                                    "supl": "fileA.handle"
+                                },
+                                "name": "acquireA",
+                                "status": {
+                                    "bool": true
+                                },
+                                "timeout": {
+                                    "number": 5000
+                                },
+                                "width": {
+                                    "number": 640
+                                }
+                            },
+                            "id": "image:acquire",
+                            "instr": "acquireA"
+                        },
+                        {
+                            "data": {
+                                "background_mode": {
+                                    "number": 0
+                                },
+                                "background_value": {
+                                    "number": 0
+                                },
+                                "children": [
+                                    {
+                                        "data": {
+                                            "a": {
+                                                "number": 0
+                                            },
+                                            "children": [
+                                                {
+                                                    "data": {
+                                                        "angle": {
+                                                            "number": 1.5,
+                                                            "supl": "addA.sum"
+                                                        },
+                                                        "enabled": {
+                                                            "bool": true
+                                                        },
+                                                        "fill": {
+                                                            "number": 0
+                                                        },
+                                                        "interpolation": {
+                                                            "number": 1
+                                                        },
+                                                        "name": "rotateA",
+                                                        "userdata": {
+                                                            "image": {
+                                                                "showInProgramTree": false
+                                                            }
+                                                        }
+                                                    },
+                                                    "id": "preprocessor:rotate",
+                                                    "instr": "rotateA"
+                                                }
+                                            ],
+                                            "cx": {
+                                                "number": 266.5
+                                            },
+                                            "cy": {
+                                                "number": 206
+                                            },
+                                            "enabled": {
+                                                "bool": true
+                                            },
+                                            "error_on_roi_outside": {
+                                                "bool": false
+                                            },
+                                            "h": {
+                                                "number": 270
+                                            },
+                                            "interpolation": {
+                                                "number": 1
+                                            },
+                                            "label_pos": {
+                                                "point": "10.00000000000000000 -20.00000000000000000"
+                                            },
+                                            "lock_movement": {
+                                                "bool": false
+                                            },
+                                            "mask_input": {
+                                                "bool": false
+                                            },
+                                            "mask_json": {
+                                                "string": "{\n    \"invert\": false,\n    \"records\": [\n    ],\n    \"type\": \"mask\",\n    \"ver\": 1\n}\n"
+                                            },
+                                            "mask_output": {
+                                                "bool": false
+                                            },
+                                            "modify_image": {
+                                                "bool": true
+                                            },
+                                            "name": "rectA",
+                                            "pass": {
+                                                "bool": true
+                                            },
+                                            "proc_slots": {
+                                                "boolvector": [
+                                                    true,
+                                                    false,
+                                                    false,
+                                                    false,
+                                                    false,
+                                                    false,
+                                                    false,
+                                                    false,
+                                                    false,
+                                                    false,
+                                                    false,
+                                                    false,
+                                                    false,
+                                                    false,
+                                                    false
+                                                ]
+                                            },
+                                            "roi_in_image": {
+                                                "bool": true
+                                            },
+                                            "show_roi": {
+                                                "bool": true
+                                            },
+                                            "tolerance": [
+                                            ],
+                                            "user_flags": 4,
+                                            "userdata": {
+                                                "image": {
+                                                    "showInProgramTree": false
+                                                },
+                                                "parent_image": {
+                                                    "showInProgramTree": false
+                                                },
+                                                "pass": {
+                                                    "showInProgramTree": false
+                                                }
+                                            },
+                                            "w": {
+                                                "number": 279
+                                            }
+                                        },
+                                        "id": "roi:rectangle",
+                                        "instr": "rectA"
+                                    },
+                                    {
+                                        "data": {
+                                            "a": {
+                                                "number": 0
+                                            },
+                                            "children": [
+                                                {
+                                                    "data": {
+                                                        "average": {
+                                                            "number": 227.34962406015038,
+                                                            "recv": "current.value"
+                                                        },
+                                                        "enabled": {
+                                                            "bool": true
+                                                        },
+                                                        "name": "averageA",
+                                                        "userdata": {
+                                                            "image": {
+                                                                "showInProgramTree": false
+                                                            }
+                                                        }
+                                                    },
+                                                    "id": "algorithm:average",
+                                                    "instr": "averageA"
+                                                }
+                                            ],
+                                            "cx": {
+                                                "number": 213
+                                            },
+                                            "cy": {
+                                                "number": 163.5
+                                            },
+                                            "enabled": {
+                                                "bool": true
+                                            },
+                                            "error_on_roi_outside": {
+                                                "bool": false
+                                            },
+                                            "h": {
+                                                "number": 35
+                                            },
+                                            "interpolation": {
+                                                "number": 0
+                                            },
+                                            "label_pos": {
+                                                "point": "10.00000000000000000 -20.00000000000000000"
+                                            },
+                                            "lock_movement": {
+                                                "bool": false
+                                            },
+                                            "mask_input": {
+                                                "bool": false
+                                            },
+                                            "mask_json": {
+                                                "string": ""
+                                            },
+                                            "mask_output": {
+                                                "bool": false
+                                            },
+                                            "modify_image": {
+                                                "bool": true
+                                            },
+                                            "name": "Average",
+                                            "pass": {
+                                                "bool": true
+                                            },
+                                            "proc_slots": {
+                                                "boolvector": [
+                                                    false,
+                                                    false,
+                                                    false,
+                                                    false,
+                                                    false,
+                                                    false,
+                                                    false,
+                                                    false,
+                                                    false,
+                                                    false,
+                                                    true,
+                                                    false,
+                                                    false,
+                                                    false,
+                                                    false
+                                                ]
+                                            },
+                                            "roi_in_image": {
+                                                "bool": true
+                                            },
+                                            "show_roi": {
+                                                "bool": true
+                                            },
+                                            "tolerance": [
+                                            ],
+                                            "user_flags": 4,
+                                            "userdata": {
+                                                "image": {
+                                                    "showInProgramTree": false
+                                                },
+                                                "parent_image": {
+                                                    "showInProgramTree": false
+                                                },
+                                                "pass": {
+                                                    "showInProgramTree": false
+                                                },
+                                                "roi_in_image": {
+                                                    "showInProgramTree": false
+                                                }
+                                            },
+                                            "w": {
+                                                "number": 38
+                                            }
+                                        },
+                                        "id": "roi:rectangle",
+                                        "instr": "Average"
+                                    }
+                                ],
+                                "display_palette": {
+                                    "number": 0
+                                },
+                                "enabled": {
+                                    "bool": true
+                                },
+                                "executed_by_thread": {
+                                    "string": "main"
+                                },
+                                "grid_size": {
+                                    "number": 50
+                                },
+                                "interpolation": {
+                                    "number": 1
+                                },
+                                "name": "workspace_mono8A",
+                                "pass": {
+                                    "bool": true
+                                },
+                                "plugin_data": {
+                                    "overlay_data": ""
+                                },
+                                "show_grid": {
+                                    "bool": false
+                                },
+                                "src_image": {
+                                    "supl": "acquireA.image"
+                                },
+                                "tolerance": [
+                                ],
+                                "userdata": {
+                                    "handle": {
+                                        "showInProgramTree": false
+                                    },
+                                    "image": {
+                                        "showInProgramTree": false
+                                    },
+                                    "pass": {
+                                        "showInProgramTree": false
+                                    },
+                                    "window_geometry": {
+                                        "hScroll": 0,
+                                        "height": 663,
+                                        "maximized": false,
+                                        "minimized": false,
+                                        "posx": 0,
+                                        "posy": 0,
+                                        "vScroll": 0,
+                                        "width": 883,
+                                        "zoom": 1
+                                    }
+                                }
+                            },
+                            "id": "system:imageworkspace_m8",
+                            "instr": "workspace_mono8A"
+                        },
+                        {
+                            "data": {
+                                "enabled": {
+                                    "bool": true
+                                },
+                                "n0": {
+                                    "number": 0.01
+                                },
+                                "n1": {
+                                    "number": 0,
+                                    "supl": "addA.sum"
+                                },
+                                "name": "addA",
+                                "sum": {
+                                    "number": 407.3799999997745
+                                },
+                                "user_flags": 4
+                            },
+                            "id": "number:add",
+                            "instr": "addA"
+                        },
+                        {
+                            "data": {
+                                "enabled": {
+                                    "bool": true
+                                },
+                                "name": "incTotal",
+                                "result": {
+                                    "number": 24241,
+                                    "recv": "total.value"
+                                },
+                                "user_flags": 4,
+                                "value": {
+                                    "number": 0,
+                                    "supl": "total.value"
+                                }
+                            },
+                            "id": "number:increment",
+                            "instr": "incTotal"
+                        },
+                        {
+                            "data": {
+                                "children": [
+                                    {
+                                        "data": {
+                                            "children": [
+                                                {
+                                                    "data": {
+                                                        "enabled": {
+                                                            "bool": true
+                                                        },
+                                                        "name": "incPass",
+                                                        "result": {
+                                                            "number": 17345,
+                                                            "recv": "pass.value"
+                                                        },
+                                                        "value": {
+                                                            "number": 0,
+                                                            "supl": "pass.value"
+                                                        }
+                                                    },
+                                                    "id": "number:increment",
+                                                    "instr": "incPass"
+                                                }
+                                            ],
+                                            "enabled": {
+                                                "bool": true
+                                            },
+                                            "name": "ifelsetrueA"
+                                        },
+                                        "id": "system:ifelsetrue",
+                                        "instr": "ifelsetrueA"
+                                    },
+                                    {
+                                        "data": {
+                                            "children": [
+                                                {
+                                                    "data": {
+                                                        "enabled": {
+                                                            "bool": true
+                                                        },
+                                                        "name": "incFail",
+                                                        "result": {
+                                                            "number": 6895,
+                                                            "recv": "fail.value"
+                                                        },
+                                                        "value": {
+                                                            "number": 0,
+                                                            "supl": "fail.value"
+                                                        }
+                                                    },
+                                                    "id": "number:increment",
+                                                    "instr": "incFail"
+                                                }
+                                            ],
+                                            "enabled": {
+                                                "bool": true
+                                            },
+                                            "name": "ifelsefalseA"
+                                        },
+                                        "id": "system:ifelsefalse",
+                                        "instr": "ifelsefalseA"
+                                    }
+                                ],
+                                "code": {
+                                    "script": "ve.current.value>128"
+                                },
+                                "enabled": {
+                                    "bool": true
+                                },
+                                "name": "TestAverageValue"
+                            },
+                            "id": "system:ifelse",
+                            "instr": "TestAverageValue"
+                        }
+                    ],
+                    "enabled": {
+                        "bool": true
+                    },
+                    "name": "main",
+                    "run_count": {
+                        "number": 40742
+                    },
+                    "run_on": {
+                        "number": 0
+                    },
+                    "runs_per_second": {
+                        "number": 454.8969659334436
+                    },
+                    "tab_index": {
+                        "number": 0
+                    },
+                    "time_since_last_call": {
+                        "number": 24238.89620000124
+                    }
+                },
+                "id": "system:subroutine",
+                "instr": "main"
+            }
+        ],
+        "serialMgr": {
+            "__valueOrder": [
+                "serialPortA"
+            ],
+            "serialPortA": {
+                "baud_rate": {
+                    "number": 9600
+                },
+                "create_id": "serial_port",
+                "data_bits": {
+                    "number": 8
+                },
+                "device": {
+                    "string": "COM1"
+                },
+                "driver": {
+                    "string": "Serial port driver"
+                },
+                "driver_path": {
+                    "string": "D:/Sherlock8/x64/debug/drivers-bin/ipeserialportdrv.dll"
+                },
+                "flow_control": {
+                    "number": 0
+                },
+                "index": {
+                    "number": 0
+                },
+                "name": "serialPortA",
+                "parity": {
+                    "number": 0
+                },
+                "stop_bits": {
+                    "number": 1
+                }
+            }
+        },
+        "variableMgr": {
+            "__valueOrder": [
+                "total",
+                "pass",
+                "fail",
+                "current"
+            ],
+            "current": {
+                "create_id": "number",
+                "name": "current",
+                "value": {
+                    "number": 227.34962406015038
+                }
+            },
+            "fail": {
+                "create_id": "number",
+                "name": "fail",
+                "value": {
+                    "number": 6895
+                }
+            },
+            "pass": {
+                "create_id": "number",
+                "name": "pass",
+                "value": {
+                    "number": 17345
+                }
+            },
+            "total": {
+                "create_id": "number",
+                "name": "total",
+                "value": {
+                    "number": 24241
+                }
+            }
+        }
+    },
+    "info": {
+        "engine build": "x86_64 Mar 25 2025 14:27:03",
+        "engine storage version": 2,
+        "engine version": "8.31.01.0380",
+        "os running": "x86_64 Windows 10 Version 2009",
+        "program save time": "09 Apr 2025 13:26:31 -0400"
+    },
+    "tabbedMode": false,
+    "watchedValues": [
+    ]
+}
