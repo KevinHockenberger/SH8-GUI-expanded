@@ -111,16 +111,8 @@ namespace SH8_Sample
         vm.AssignStatusText(ex.Message, 2);
       }
     }
-
     private void ButtonBrowse_Click(object sender, RoutedEventArgs e)
     {
-      //var d = new Microsoft.Win32.OpenFolderDialog() { Title = "Select working directory", InitialDirectory = vm.Filename };
-      //if (d.ShowDialog() == true)
-      //{
-      //  vm.Filename = d.FolderName;
-      //}
-
-
       OpenFileDialog d = new()
       {
         InitialDirectory = System.IO.Path.GetDirectoryName(vm.Filename),
@@ -128,8 +120,7 @@ namespace SH8_Sample
         DefaultExt = ".sh8",
         Filter = "Sherlock 8 (*.sh8)|*.sh8|All files (*.*)|*.*"
       };
-      if (d.ShowDialog() == System.Windows.Forms.DialogResult.OK)
-        vm.Filename = d.FileName;
+      if (d.ShowDialog() == System.Windows.Forms.DialogResult.OK) { vm.Filename = d.FileName; }
     }
   }
 }

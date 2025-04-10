@@ -204,11 +204,46 @@
         d:Text="C:\\ProgramData\\Teledyne DALSA\\Sherlock8x64\\programs\\simple0.sh8"
         Text="{Binding Filename}" />
     </Grid>
+    <DockPanel Width="100" DockPanel.Dock="Right">
+      <StackPanel DockPanel.Dock="Top">
+        <Label Content="total" Style="{StaticResource StyleLabelHeading}" />
+        <Label
+          d:Content="0"
+          Content="{Binding Total, Converter={Converters:DoubleToZeroDecimalsFormatter}}"
+          Style="{StaticResource StyleLabelReading}" />
+        <Label Content="pass" Style="{StaticResource StyleLabelHeading}" />
+        <Label
+          d:Content="0"
+          Content="{Binding Pass, Converter={Converters:DoubleToZeroDecimalsFormatter}}"
+          Style="{StaticResource StyleLabelReading}" />
+        <Label Content="fail" Style="{StaticResource StyleLabelHeading}" />
+        <Label
+          d:Content="0"
+          Content="{Binding Fail, Converter={Converters:DoubleToZeroDecimalsFormatter}}"
+          Style="{StaticResource StyleLabelReading}" />
+      </StackPanel>
+      <Button
+        DockPanel.Dock="Bottom"
+        Command="{Binding ResetCommand}"
+        Content="reset values"
+        FontSize="14"
+        Height="36"
+        Visibility="{Binding IsConnected, Converter={StaticResource BoolToVis}}" />
+      <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
+        <StackPanel>
+          <Label Content="attribute" Style="{StaticResource StyleLabelHeading}" />
+          <Label
+            d:Content="0"
+            Content="{Binding Attribute, Converter={Converters:DoubleToThreeDecimalsFormatter}}"
+            Style="{StaticResource StyleLabelReading}" />
+        </StackPanel>
+      </ScrollViewer>
+    </DockPanel>
     <Label
       d:Content="status"
       Background="{Binding StatusBrush}"
       Content="{Binding StatusText}"
-      DockPanel.Dock="Bottom" />
+      DockPanel.Dock="Bottom" BorderBrush="Black" BorderThickness="1"/>
     <StackPanel Width="120" DockPanel.Dock="Left">
       <Button
         Grid.Column="2"
@@ -233,43 +268,7 @@
         FontSize="24"
         Foreground="Black"
         Visibility="{Binding IsConnected, Converter={StaticResource BoolToVis}}" />
-      <Button
-        Margin="5,10,5,10"
-        Padding="8"
-        Command="{Binding ResetCommand}"
-        Content="reset values"
-        FontSize="14"
-        Visibility="{Binding IsConnected, Converter={StaticResource BoolToVis}}" />
     </StackPanel>
-    <DockPanel Width="100" DockPanel.Dock="Right">
-
-      <StackPanel DockPanel.Dock="Top">
-        <Label Content="total" Style="{StaticResource StyleLabelHeading}" />
-        <Label
-          d:Content="0"
-          Content="{Binding Total, Converter={Converters:DoubleToZeroDecimalsFormatter}}"
-          Style="{StaticResource StyleLabelReading}" />
-        <Label Content="pass" Style="{StaticResource StyleLabelHeading}" />
-        <Label
-          d:Content="0"
-          Content="{Binding Pass, Converter={Converters:DoubleToZeroDecimalsFormatter}}"
-          Style="{StaticResource StyleLabelReading}" />
-        <Label Content="fail" Style="{StaticResource StyleLabelHeading}" />
-        <Label
-          d:Content="0"
-          Content="{Binding Fail, Converter={Converters:DoubleToZeroDecimalsFormatter}}"
-          Style="{StaticResource StyleLabelReading}" />
-      </StackPanel>
-      <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
-        <StackPanel>
-          <Label Content="attribute" Style="{StaticResource StyleLabelHeading}" />
-          <Label
-            d:Content="0"
-            Content="{Binding Attribute, Converter={Converters:DoubleToThreeDecimalsFormatter}}"
-            Style="{StaticResource StyleLabelReading}" />
-        </StackPanel>
-      </ScrollViewer>
-    </DockPanel>
     <Border
       x:Name="ImageArea"
       HorizontalAlignment="Stretch"
