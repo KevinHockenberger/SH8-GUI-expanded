@@ -18,10 +18,10 @@
       <Value Profile="(Default)">100</Value>
     </Setting>
     <Setting Name="LastWindowState" Type="System.String" Scope="User">
-      <Value Profile="(Default)">null</Value>
+      <Value Profile="(Default)" />
     </Setting>
     <Setting Name="LastFilename" Type="System.String" Scope="User">
-      <Value Profile="(Default)">null</Value>
+      <Value Profile="(Default)" />
     </Setting>
   </Settings>
 </SettingsFile>

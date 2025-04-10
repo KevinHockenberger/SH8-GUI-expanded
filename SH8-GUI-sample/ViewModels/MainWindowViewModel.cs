@@ -128,21 +128,24 @@ namespace SH8_Sample.ViewModels
       }
       return false;
     }
-    public void ConnectSherlock()
+    public bool ConnectSherlock()
     {
+      if (string.IsNullOrWhiteSpace(Filename)) { AssignStatusText("Select a file first", 3); return false; }
+      if (!System.IO.File.Exists(Filename)) { AssignStatusText("File not found", 3); return false; }
       try
       {
         HSh8 = new();
         // initialize the engine
-        if (HSh8.initialize("default") != SH8Res.Ok) { IsConnected = false; return; }
+        if (HSh8.initialize("default") != SH8Res.Ok) { IsConnected = false; return false; }
         // load the file
-        if (HSh8.load(Filename) != SH8Res.Ok) { IsConnected = false; return; }
+        if (HSh8.load(Filename) != SH8Res.Ok) { IsConnected = false; return false; }
         // connect events
         HSh8.programLoopCompleted += GetSherlockValues;
         // GUI update if bound
         IsConnected = true;
         // load the initial values into the GUI
         GetSherlockValues();
+        return true;
       }
       catch (Exception ex)
       {
@@ -150,6 +153,7 @@ namespace SH8_Sample.ViewModels
         AssignStatusText($"{ex.Message}", 4);
         // GUI update if bound
         IsConnected = false;
+        return false;
       }
     }
     private void GetSherlockValues()
@@ -172,7 +176,7 @@ namespace SH8_Sample.ViewModels
     }
     private void ResetVariables()
     {
-      if (HSh8 == null) { return; }
+      if (HSh8 == null) { AssignStatusText("Sherlock not initialized", 3); return; }
       try
       {
         // assign all properties to 0

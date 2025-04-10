@@ -86,8 +86,12 @@ namespace SH8_Sample
       // since we are loading an image window control, this code is here and not in a view model command
       try
       {
+        // notify user. this may not show depending on time to load the control
+        vm.AssignStatusText("Loading Sherlock ... please wait", 2);
+        // hide logo
+        imgDefault.Visibility = Visibility.Collapsed;
         // initialize the Sherlock engine
-        vm.ConnectSherlock();
+        if (!vm.ConnectSherlock()) { return; }
         // create a Sherlock image window
         AxAxIpeDisplay imgWindow = new AxAxIpeDisplay();
         // create a WinForms host to use in WPF
@@ -106,6 +110,26 @@ namespace SH8_Sample
         // don't crash on an error. show it
         vm.AssignStatusText(ex.Message, 2);
       }
+    }
+
+    private void ButtonBrowse_Click(object sender, RoutedEventArgs e)
+    {
+      //var d = new Microsoft.Win32.OpenFolderDialog() { Title = "Select working directory", InitialDirectory = vm.Filename };
+      //if (d.ShowDialog() == true)
+      //{
+      //  vm.Filename = d.FolderName;
+      //}
+
+
+      OpenFileDialog d = new()
+      {
+        InitialDirectory = System.IO.Path.GetDirectoryName(vm.Filename),
+        FileName = System.IO.Path.GetFileName(vm.Filename),
+        DefaultExt = ".sh8",
+        Filter = "Sherlock 8 (*.sh8)|*.sh8|All files (*.*)|*.*"
+      };
+      if (d.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+        vm.Filename = d.FileName;
     }
   }
 }

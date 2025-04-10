@@ -85,7 +85,7 @@ namespace SH8_Sample.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("null")]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
         public string LastWindowState {
             get {
                 return ((string)(this["LastWindowState"]));
@@ -97,7 +97,7 @@ namespace SH8_Sample.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("null")]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
         public string LastFilename {
             get {
                 return ((string)(this["LastFilename"]));

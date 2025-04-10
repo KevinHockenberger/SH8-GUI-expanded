@@ -8,11 +8,11 @@
   xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
   xmlns:vm="clr-namespace:SH8_Sample.ViewModels"
   Title="Sherlock 8 WPF sample application"
-  Width="377"
-  Height="359"
+  Width="508"
+  Height="397"
   d:DataContext="{d:DesignInstance vm:MainWindowViewModel}"
   Closing="Window_Closing"
-  FontSize="20"
+  FontSize="18"
   Icon="/Include/FCTHex48.png"
   Initialized="Window_Initialized"
   mc:Ignorable="d">
@@ -22,15 +22,164 @@
   </Window.DataContext>-->
   <Window.Resources>
     <ResourceDictionary>
-      <!--<SolidColorBrush x:Key="myButtonColor" Color="#FFB7CAAD" />
-      <Style TargetType="Button">
+      <Style x:Key="StyleLabelHeading" TargetType="Label">
         <Style.Setters>
-          <Setter Property="Background" Value="{StaticResource myButtonColor}" />
-          <Setter Property="Foreground" Value="Black" />
+          <Setter Property="Padding" Value="2" />
+          <Setter Property="FontSize" Value="12" />
+          <Setter Property="FontStyle" Value="Italic" />
+          <Setter Property="Background" Value="LightGray" />
         </Style.Setters>
-      </Style>-->
+      </Style>
+      <Style x:Key="StyleLabelReading" TargetType="Label">
+        <Style.Setters>
+          <Setter Property="Padding" Value="2" />
+          <Setter Property="FontWeight" Value="Bold" />
+          <Setter Property="HorizontalContentAlignment" Value="Right" />
+        </Style.Setters>
+      </Style>
       <Converters:DoubleToZeroDecimalsFormatter x:Key="IntegerFormatter" />
       <Converters:DoubleToThreeDecimalsFormatter x:Key="DoubleFormatter" />
+      <DrawingGroup x:Key="logo_xaml">
+        <DrawingGroup.ClipGeometry>
+          <RectangleGeometry Rect="0.0,0.0,71.437501,11.1125" />
+        </DrawingGroup.ClipGeometry>
+        <DrawingGroup Transform="1.0,0.0,0.0,1.0,-69.568962,-141.61098">
+          <GeometryDrawing Brush="#ff0077c0">
+            <GeometryDrawing.Pen>
+              <Pen
+              Brush="#ff0077c0"
+              DashCap="Flat"
+              Thickness="0.165" />
+            </GeometryDrawing.Pen>
+            <GeometryDrawing.Geometry>
+              <PathGeometry Figures="m 74.349 143.016 h 4.4548 l -3.13208 3.13208 h -4.45791 z" FillRule="Nonzero" />
+            </GeometryDrawing.Geometry>
+          </GeometryDrawing>
+          <GeometryDrawing Brush="#ff0077c0">
+            <GeometryDrawing.Pen>
+              <Pen
+              Brush="#ff0077c0"
+              DashCap="Flat"
+              Thickness="0.165" />
+            </GeometryDrawing.Pen>
+            <GeometryDrawing.Geometry>
+              <PathGeometry Figures="m 76.2288 146.727 l 3.15002 -3.15002 l 1e-06 4.42943 l -3.15221 3.15221 z" FillRule="Nonzero" />
+            </GeometryDrawing.Geometry>
+          </GeometryDrawing>
+          <GeometryDrawing Brush="#ff0077c0">
+            <GeometryDrawing.Pen>
+              <Pen
+              Brush="#ff0077c0"
+              DashCap="Flat"
+              Thickness="0.165" />
+            </GeometryDrawing.Pen>
+            <GeometryDrawing.Geometry>
+              <PathGeometry Figures="m 83.3489 146.738 l -3.15002 -3.15002 l -1e-06 4.42943 l 3.15221 3.15221 z" FillRule="Nonzero" />
+            </GeometryDrawing.Geometry>
+          </GeometryDrawing>
+          <GeometryDrawing Brush="#ff0077c0">
+            <GeometryDrawing.Pen>
+              <Pen
+              Brush="#ff0077c0"
+              DashCap="Flat"
+              Thickness="0.165" />
+            </GeometryDrawing.Pen>
+            <GeometryDrawing.Geometry>
+              <PathGeometry Figures="m 85.1352 143.009 h -4.4548 l 3.13208 3.13208 h 4.45791 z" FillRule="Nonzero" />
+            </GeometryDrawing.Geometry>
+          </GeometryDrawing>
+          <GeometryDrawing Brush="#ff0077c0">
+            <GeometryDrawing.Pen>
+              <Pen
+              Brush="#ff0077c0"
+              DashCap="Flat"
+              Thickness="0.165" />
+            </GeometryDrawing.Pen>
+            <GeometryDrawing.Geometry>
+              <PathGeometry Figures="m 89.6955 142.978 l -0.0052 1.17553 l 1.95378 0.0138 l -0.0048 7.19805 l 1.66939 0.0112 l -0.007 -7.2173 l 2.15318 0.00065 l 0.0057 -1.1827 z" FillRule="Nonzero" />
+            </GeometryDrawing.Geometry>
+          </GeometryDrawing>
+          <GeometryDrawing Brush="#ff0077c0">
+            <GeometryDrawing.Pen>
+              <Pen
+              Brush="#ff0077c0"
+              DashCap="Flat"
+              Thickness="0.165" />
+            </GeometryDrawing.Pen>
+            <GeometryDrawing.Geometry>
+              <PathGeometry Figures="m 96.3853 142.981 h 4.54358 v 1.09594 h -2.80834 v 2.32887 h 2.61427 v 1.17585 h -2.61427 v 2.65995 h 2.93392 v 1.17585 h -4.70341 z" FillRule="Nonzero" />
+            </GeometryDrawing.Geometry>
+          </GeometryDrawing>
+          <GeometryDrawing Brush="#ff0077c0">
+            <GeometryDrawing.Pen>
+              <Pen
+              Brush="#ff0077c0"
+              DashCap="Flat"
+              Thickness="0.165" />
+            </GeometryDrawing.Pen>
+            <GeometryDrawing.Geometry>
+              <PathGeometry Figures="m 102.246 142.983 v 8.43049 h 4.31064 v -1.17493 h -2.61545 v -7.25653 z" FillRule="Nonzero" />
+            </GeometryDrawing.Geometry>
+          </GeometryDrawing>
+          <GeometryDrawing Brush="#ff0077c0">
+            <GeometryDrawing.Pen>
+              <Pen
+              Brush="#ff0077c0"
+              DashCap="Flat"
+              Thickness="0.165" />
+            </GeometryDrawing.Pen>
+            <GeometryDrawing.Geometry>
+              <PathGeometry Figures="m 107.655 142.977 h 4.54359 v 1.09594 h -2.80834 v 2.32887 h 2.61427 v 1.17585 h -2.61427 v 2.65995 h 2.93392 v 1.17585 h -4.70342 z" FillRule="Nonzero" />
+            </GeometryDrawing.Geometry>
+          </GeometryDrawing>
+          <GeometryDrawing Brush="#ff0077c0">
+            <GeometryDrawing.Pen>
+              <Pen
+              Brush="#ff0077c0"
+              DashCap="Flat"
+              Thickness="0.165" />
+            </GeometryDrawing.Pen>
+            <GeometryDrawing.Geometry>
+              <PathGeometry Figures="m 113.563 142.975 v 8.43771 h 3.18645 c 0.93846 -0.11194 1.32824 -0.3878 1.68664 -0.75821 c 0.39677 -0.44741 0.62996 -1.25284 0.66104 -2.02812 v -2.94654 c 0 -0.93863 -0.32275 -1.55299 -0.66363 -1.97375 c -0.29928 -0.29115 -0.75604 -0.70319 -1.43362 -0.72954 z m 2.53714 1.09802 c 0.6332 0.11944 0.85498 0.36037 1.15916 0.71539 c 0.16865 0.30353 0.27335 0.59292 0.2652 1.27654 l -0.013 2.11133 c -0.0541 0.68684 -0.0781 1.29929 -0.32743 1.60974 c -0.28135 0.26423 -0.52336 0.40605 -1.08635 0.4498 l -0.90634 0.002 l 0.001 -6.17184 z" FillRule="Nonzero" />
+            </GeometryDrawing.Geometry>
+          </GeometryDrawing>
+          <GeometryDrawing Brush="#ff0077c0">
+            <GeometryDrawing.Pen>
+              <Pen
+              Brush="#ff0077c0"
+              DashCap="Flat"
+              Thickness="0.165" />
+            </GeometryDrawing.Pen>
+            <GeometryDrawing.Geometry>
+              <PathGeometry Figures="m 119.65 142.97 l 2.24412 5.37342 v 3.06473 h 1.59833 v -2.9477 l 2.40757 -5.48572 h -1.61648 l -1.40459 3.51205 l -1.37231 -3.51874 z" FillRule="Nonzero" />
+            </GeometryDrawing.Geometry>
+          </GeometryDrawing>
+          <GeometryDrawing Brush="#ff0077c0">
+            <GeometryDrawing.Pen>
+              <Pen
+              Brush="#ff0077c0"
+              DashCap="Flat"
+              Thickness="0.165" />
+            </GeometryDrawing.Pen>
+            <GeometryDrawing.Geometry>
+              <PathGeometry Figures="m 127.016 142.934 l 2.29306 -0.003 l 2.44527 5.94989 l 0.0113 -5.94782 l 1.58318 0.002 v 8.50323 l -2.27433 0.0001 l -2.54616 -6.61055 l -0.002 6.60937 l -1.50751 0.002 z" FillRule="Nonzero" />
+            </GeometryDrawing.Geometry>
+          </GeometryDrawing>
+          <GeometryDrawing Brush="#ff0077c0">
+            <GeometryDrawing.Pen>
+              <Pen
+              Brush="#ff0077c0"
+              DashCap="Flat"
+              Thickness="0.165" />
+            </GeometryDrawing.Pen>
+            <GeometryDrawing.Geometry>
+              <PathGeometry Figures="m 134.849 142.996 h 4.54359 v 1.09594 h -2.80834 v 2.32887 h 2.61427 v 1.17585 h -2.61427 v 2.65995 h 2.93392 v 1.17585 h -4.70342 z" FillRule="Nonzero" />
+            </GeometryDrawing.Geometry>
+          </GeometryDrawing>
+        </DrawingGroup>
+      </DrawingGroup>
+      <DrawingImage x:Key="di_logo_xaml" Drawing="{StaticResource logo_xaml}" />
+
     </ResourceDictionary>
   </Window.Resources>
   <!--
@@ -42,103 +191,91 @@
       <Grid.ColumnDefinitions>
         <ColumnDefinition Width="Auto" />
         <ColumnDefinition Width="*" />
-        <ColumnDefinition Width="Auto" />
+        <ColumnDefinition Width="40" />
       </Grid.ColumnDefinitions>
       <Label Grid.Column="0" Content="file" />
       <Button
         Grid.Column="2"
-        Click="InitSherlock"
-        Content="load"
-        IsEnabled="{Binding IsNotConnected}" />
+        Click="ButtonBrowse_Click"
+        Content="..." />
       <TextBox
         Grid.Column="1"
         VerticalContentAlignment="Center"
         d:Text="C:\\ProgramData\\Teledyne DALSA\\Sherlock8x64\\programs\\simple0.sh8"
         Text="{Binding Filename}" />
     </Grid>
-    <StackPanel DockPanel.Dock="Bottom">
-      <Grid>
-        <Grid.ColumnDefinitions>
-          <ColumnDefinition Width="Auto" />
-          <ColumnDefinition Width="*" />
-          <ColumnDefinition Width="Auto" />
-          <ColumnDefinition Width="*" />
-          <ColumnDefinition Width="Auto" />
-          <ColumnDefinition Width="*" />
-          <ColumnDefinition Width="Auto" />
-          <ColumnDefinition Width="*" />
-        </Grid.ColumnDefinitions>
-        <Label
-          Padding="2"
-          VerticalContentAlignment="Center"
-          Content="total"
-          FontSize="10" />
-        <Label
-          Grid.Column="1"
-          d:Content="0"
-          Content="{Binding Total, Converter={Converters:DoubleToZeroDecimalsFormatter}}" />
-        <Label
-          Grid.Column="2"
-          Padding="2"
-          VerticalContentAlignment="Center"
-          Content="pass"
-          FontSize="10" />
-        <Label
-          Grid.Column="3"
-          d:Content="0"
-          Content="{Binding Pass, Converter={Converters:DoubleToZeroDecimalsFormatter}}" />
-        <Label
-          Grid.Column="4"
-          Padding="2"
-          VerticalContentAlignment="Center"
-          Content="fail"
-          FontSize="10" />
-        <Label
-          Grid.Column="5"
-          d:Content="0"
-          Content="{Binding Fail, Converter={Converters:DoubleToZeroDecimalsFormatter}}" />
-        <Label
-          Grid.Column="6"
-          Padding="2"
-          VerticalContentAlignment="Center"
-          Content="attribute"
-          FontSize="10" />
-        <Label
-          Grid.Column="7"
-          d:Content="0"
-          Content="{Binding Attribute, Converter={Converters:DoubleToThreeDecimalsFormatter}}" />
-      </Grid>
-      <Label
-        d:Content="status"
-        Background="{Binding StatusBrush}"
-        Content="{Binding StatusText}"
-        FontSize="12" />
-    </StackPanel>
-    <StackPanel Width="200" DockPanel.Dock="Right">
+    <Label
+      d:Content="status"
+      Background="{Binding StatusBrush}"
+      Content="{Binding StatusText}"
+      DockPanel.Dock="Bottom" />
+    <StackPanel Width="120" DockPanel.Dock="Left">
+      <Button
+        Grid.Column="2"
+        Click="InitSherlock"
+        Content="LOAD FILE"
+        Visibility="{Binding IsNotConnected, Converter={StaticResource BoolToVis}}" />
       <Button
         Margin="5,10,5,10"
         Padding="8"
         Background="LimeGreen"
         Command="{Binding StartCommand}"
         Content="START"
-        Foreground="Black" />
+        FontSize="24"
+        Foreground="Black"
+        Visibility="{Binding IsConnected, Converter={StaticResource BoolToVis}}" />
       <Button
         Margin="5,10,5,10"
         Padding="8"
         Background="#FFFF7E71"
         Command="{Binding StopCommand}"
         Content="STOP"
-        Foreground="Black" />
+        FontSize="24"
+        Foreground="Black"
+        Visibility="{Binding IsConnected, Converter={StaticResource BoolToVis}}" />
       <Button
         Margin="5,10,5,10"
         Padding="8"
         Command="{Binding ResetCommand}"
-        Content="reset values" />
+        Content="reset values"
+        FontSize="14"
+        Visibility="{Binding IsConnected, Converter={StaticResource BoolToVis}}" />
     </StackPanel>
+    <DockPanel Width="100" DockPanel.Dock="Right">
+
+      <StackPanel DockPanel.Dock="Top">
+        <Label Content="total" Style="{StaticResource StyleLabelHeading}" />
+        <Label
+          d:Content="0"
+          Content="{Binding Total, Converter={Converters:DoubleToZeroDecimalsFormatter}}"
+          Style="{StaticResource StyleLabelReading}" />
+        <Label Content="pass" Style="{StaticResource StyleLabelHeading}" />
+        <Label
+          d:Content="0"
+          Content="{Binding Pass, Converter={Converters:DoubleToZeroDecimalsFormatter}}"
+          Style="{StaticResource StyleLabelReading}" />
+        <Label Content="fail" Style="{StaticResource StyleLabelHeading}" />
+        <Label
+          d:Content="0"
+          Content="{Binding Fail, Converter={Converters:DoubleToZeroDecimalsFormatter}}"
+          Style="{StaticResource StyleLabelReading}" />
+      </StackPanel>
+      <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
+        <StackPanel>
+          <Label Content="attribute" Style="{StaticResource StyleLabelHeading}" />
+          <Label
+            d:Content="0"
+            Content="{Binding Attribute, Converter={Converters:DoubleToThreeDecimalsFormatter}}"
+            Style="{StaticResource StyleLabelReading}" />
+        </StackPanel>
+      </ScrollViewer>
+    </DockPanel>
     <Border
       x:Name="ImageArea"
       HorizontalAlignment="Stretch"
       VerticalAlignment="Stretch"
-      BorderThickness="4" />
+      BorderThickness="4" >
+      <Image x:Name="imgDefault" Source="{StaticResource di_logo_xaml}" Stretch="Uniform" />
+    </Border>
   </DockPanel>
 </Window>
