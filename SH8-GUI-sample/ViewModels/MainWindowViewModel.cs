@@ -118,7 +118,10 @@ namespace SH8_Sample.ViewModels
       /* code that should run to clean up resources */
       try
       {
-        StopMachine();
+        if (!IsConnected) { return true; }
+        if (IsInAuto) { StopMachine(); }
+        // check that stopping was successful
+        if (IsInAuto) { return false; }
         HSh8?.disconnect();
         HSh8?.terminate();
         return true;
@@ -227,6 +230,7 @@ namespace SH8_Sample.ViewModels
           tries--;
           if (tries < 0) { break; } // give up after 10 tries
         }
+        tries = 10;
         if (HSh8.isRunning())
         {
           // if we are still running, try to abort
