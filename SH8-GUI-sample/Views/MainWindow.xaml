@@ -6,6 +6,7 @@
   xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
   xmlns:local="clr-namespace:SH8_Sample"
   xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+  xmlns:model="clr-namespace:SH8_Sample.Models"
   xmlns:vm="clr-namespace:SH8_Sample.ViewModels"
   Title="Sherlock 8 WPF sample application"
   Width="508"
@@ -179,7 +180,6 @@
         </DrawingGroup>
       </DrawingGroup>
       <DrawingImage x:Key="di_logo_xaml" Drawing="{StaticResource logo_xaml}" />
-
     </ResourceDictionary>
   </Window.Resources>
   <!--
@@ -204,25 +204,56 @@
         d:Text="C:\\ProgramData\\Teledyne DALSA\\Sherlock8x64\\programs\\simple0.sh8"
         Text="{Binding Filename}" />
     </Grid>
-    <Border
-      Width="100"
-      DockPanel.Dock="Right">
+
+    <Label
+      d:Content="status"
+      Background="{Binding StatusBrush}"
+      Content="{Binding StatusText}"
+      DockPanel.Dock="Bottom" />
+    <Border Width="250" DockPanel.Dock="Right">
       <DockPanel>
         <StackPanel DockPanel.Dock="Top">
-          <Label Content="total" Style="{StaticResource StyleLabelHeading}" />
+          <DockPanel Background="LightGray">
+            <Label
+              Padding="4 0"
+              d:Content="0"
+              Content="{Binding Totals.PPM}"
+              ContentStringFormat="{}{0:#,##0} ppm"
+              DockPanel.Dock="Right"
+              FontSize="12" VerticalContentAlignment="Center"/>
+            <Label Content="total" Style="{StaticResource StyleLabelHeading}" />
+          </DockPanel>
           <Label
             d:Content="0"
-            Content="{Binding Total, Converter={Converters:DoubleToZeroDecimalsFormatter}}"
+            Content="{Binding Totals.Overall, Converter={Converters:DoubleToZeroDecimalsFormatter}}"
             Style="{StaticResource StyleLabelReading}" />
-          <Label Content="pass" Style="{StaticResource StyleLabelHeading}" />
+          <DockPanel Background="LightGray">
+            <Label
+              Padding="4 0"
+              d:Content="0"
+              Content="{Binding Totals.PassPercentage}"
+              ContentStringFormat="{}{0:0.0} %"
+              DockPanel.Dock="Right"
+              FontSize="12" VerticalContentAlignment="Center"/>
+            <Label Content="pass" Style="{StaticResource StyleLabelHeading}" />
+          </DockPanel>
           <Label
             d:Content="0"
-            Content="{Binding Pass, Converter={Converters:DoubleToZeroDecimalsFormatter}}"
+            Content="{Binding Totals.Pass, Converter={Converters:DoubleToZeroDecimalsFormatter}}"
             Style="{StaticResource StyleLabelReading}" />
-          <Label Content="fail" Style="{StaticResource StyleLabelHeading}" />
+          <DockPanel Background="LightGray">
+            <Label
+              Padding="4 0"
+              d:Content="0"
+              Content="{Binding Totals.FailPercentage}"
+              ContentStringFormat="{}{0:0.0} %"
+              DockPanel.Dock="Right"
+              FontSize="12" VerticalContentAlignment="Center"/>
+            <Label Content="fail" Style="{StaticResource StyleLabelHeading}" />
+          </DockPanel>
           <Label
             d:Content="0"
-            Content="{Binding Fail, Converter={Converters:DoubleToZeroDecimalsFormatter}}"
+            Content="{Binding Totals.Fail, Converter={Converters:DoubleToZeroDecimalsFormatter}}"
             Style="{StaticResource StyleLabelReading}" />
         </StackPanel>
         <Button
@@ -234,23 +265,123 @@
           Visibility="{Binding IsConnected, Converter={StaticResource BoolToVis}}" />
         <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
           <StackPanel>
-            <Label Content="attribute" Style="{StaticResource StyleLabelHeading}" />
-            <Label
-              d:Content="0"
-              Content="{Binding Attribute, Converter={Converters:DoubleToThreeDecimalsFormatter}}"
-              Style="{StaticResource StyleLabelReading}" />
+            <Grid Background="DarkGray">
+              <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1*" />
+                <ColumnDefinition Width="1*" />
+                <ColumnDefinition Width="1*" />
+                <ColumnDefinition Width="1.5*" />
+              </Grid.ColumnDefinitions>
+              <Label
+                Padding="4,0"
+                HorizontalContentAlignment="Center"
+                BorderBrush="Black"
+                BorderThickness="1"
+                Content="max"
+                FontSize="12"
+                Foreground="White" />
+              <Label
+                Grid.Column="1"
+                Padding="4,0"
+                HorizontalContentAlignment="Center"
+                BorderBrush="Black"
+                BorderThickness="1"
+                Content="cur"
+                FontSize="12"
+                Foreground="White" />
+              <Label
+                Grid.Column="2"
+                Padding="4,0"
+                HorizontalContentAlignment="Center"
+                BorderBrush="Black"
+                BorderThickness="1"
+                Content="min"
+                FontSize="12"
+                Foreground="White" />
+              <Label
+                Grid.Column="3"
+                Padding="4,0"
+                HorizontalContentAlignment="Center"
+                BorderBrush="Black"
+                BorderThickness="1"
+                Content="fail"
+                FontSize="12"
+                Foreground="White" />
+            </Grid>
+
+            <ItemsControl
+              Padding="0"
+              HorizontalContentAlignment="Stretch"
+              Grid.IsSharedSizeScope="True"
+              ItemsSource="{Binding SherlockAttributeList}">
+              <ItemsControl.ItemTemplate>
+                <DataTemplate DataType="{x:Type model:SherlockAttribute}">
+                  <Grid>
+                    <Grid.ColumnDefinitions>
+                      <ColumnDefinition Width="1*" />
+                      <ColumnDefinition Width="1*" />
+                      <ColumnDefinition Width="1*" />
+                      <ColumnDefinition Width="1.5*" />
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                      <RowDefinition Height="Auto" />
+                      <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+                    <DockPanel
+                      Grid.Column="0"
+                      Grid.ColumnSpan="4"
+                      Background="LightGray">
+                      <Label
+                        Padding="4 0"
+                        Content="{Binding Percentage}"
+                        ContentStringFormat="{}{0:0.0} %"
+                        DockPanel.Dock="Right"
+                        FontSize="12" />
+                      <Label
+                        Padding="0"
+                        Content="{Binding Name}"
+                        FontSize="12"
+                        FontStyle="Italic" />
+                    </DockPanel>
+                    <Label
+                      Grid.Row="1"
+                      Grid.Column="0"
+                      HorizontalContentAlignment="Right"
+                      VerticalContentAlignment="Bottom"
+                      Content="{Binding MaxFormatted}"
+                      FontSize="14" />
+                    <Label
+                      Grid.Row="1"
+                      Grid.Column="1"
+                      HorizontalContentAlignment="Right"
+                      VerticalContentAlignment="Bottom"
+                      Content="{Binding CurFormatted}"
+                      FontWeight="Bold" />
+                    <Label
+                      Grid.Row="1"
+                      Grid.Column="2"
+                      HorizontalContentAlignment="Right"
+                      VerticalContentAlignment="Bottom"
+                      Content="{Binding MinFormatted}"
+                      FontSize="14" />
+                    <Label
+                      Grid.Row="1"
+                      Grid.Column="3"
+                      HorizontalContentAlignment="Right"
+                      VerticalContentAlignment="Bottom"
+                      Content="{Binding FailFormatted}"
+                      FontWeight="Bold" />
+                  </Grid>
+
+                </DataTemplate>
+
+              </ItemsControl.ItemTemplate>
+            </ItemsControl>
           </StackPanel>
         </ScrollViewer>
       </DockPanel>
     </Border>
-    <Label
-      d:Content="status"
-      Background="{Binding StatusBrush}"
-      Content="{Binding StatusText}"
-      DockPanel.Dock="Bottom" />
-    <Border
-      Width="120"
-      DockPanel.Dock="Left">
+    <Border Width="120" DockPanel.Dock="Left">
       <StackPanel>
         <Button
           Grid.Column="2"

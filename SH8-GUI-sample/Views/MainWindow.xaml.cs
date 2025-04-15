@@ -27,6 +27,7 @@ namespace SH8_Sample
     }
     private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
     {
+      if (vm.IsInAuto) { e.Cancel = true; vm.AssignStatusText("Stop inspection before closing", 3); return; }
       SaveAppSettings();
       if (!vm.Dispose())
       {
@@ -37,9 +38,7 @@ namespace SH8_Sample
           if (!vm.Dispose())
           {
             // could not stop ...
-            e.Cancel = true;
-            vm.AssignStatusText("Could not close application", 4);
-            return;
+            
           }
         }
       }

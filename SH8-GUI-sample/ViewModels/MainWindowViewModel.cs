@@ -3,10 +3,12 @@ using SH8_Sample.Models;
 using SH8_Sample.Properties;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Data;
 using System.Linq;
 using System.Runtime.CompilerServices;
+using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Controls;
@@ -69,34 +71,37 @@ namespace SH8_Sample.ViewModels
       get { return string.IsNullOrWhiteSpace(Settings.Default.LastFilename) ? $"{System.AppDomain.CurrentDomain.BaseDirectory}include\\sample_inspection.sh8" : Settings.Default.LastFilename; }
       set { if (Settings.Default.LastFilename != value) { Settings.Default.LastFilename = value; OnPropertyChanged(); } }
     }
-    private double total = 0;
-    public double Total
+
+    private ObservableCollection<SherlockAttribute> sherlockAttributeList = new();
+    public ObservableCollection<SherlockAttribute> SherlockAttributeList { get => sherlockAttributeList; set { if (sherlockAttributeList != value) { sherlockAttributeList = value; OnPropertyChanged(); } } }
+
+    private Totals totals = new();
+    public Totals Totals
     {
-      get => total;
-      // only settable from within the class
-      private set { if (total != value) { total = value; OnPropertyChanged(); } }
+      get => totals;
     }
-    private double pass = 0;
-    public double Pass
-    {
-      get => pass;
-      // only settable from within the class
-      private set { if (pass != value) { pass = value; OnPropertyChanged(); } }
-    }
-    private double fail = 0;
-    public double Fail
-    {
-      get => fail;
-      // only settable from within the class
-      private set { if (fail != value) { fail = value; OnPropertyChanged(); } }
-    }
-    private double attribute = 0;
-    public double Attribute
-    {
-      get => attribute;
-      // only settable from within the class
-      private set { if (attribute != value) { attribute = value; OnPropertyChanged(); } }
-    }
+    //private double? total = 0;
+    //public double? Total
+    //{
+    //  get => total;
+    //  // only settable from within the class
+    //  private set { if (total != value) { total = value; OnPropertyChanged(); } }
+    //}
+    //private double pass = 0;
+    //public double Pass
+    //{
+    //  get => pass;
+    //  // only settable from within the class
+    //  private set { if (pass != value) { pass = value; OnPropertyChanged(); } }
+    //}
+    //private double fail = 0;
+    //public double Fail
+    //{
+    //  get => fail;
+    //  // only settable from within the class
+    //  private set { if (fail != value) { fail = value; OnPropertyChanged(); } }
+    //}
+
     private string statusText = string.Empty;
     public string StatusText
     {
@@ -146,8 +151,10 @@ namespace SH8_Sample.ViewModels
         HSh8.programLoopCompleted += GetSherlockValues;
         // GUI update if bound
         IsConnected = true;
+        // build class objects
+        IntializeComponents();
         // load the initial values into the GUI
-        GetSherlockValues();
+        GetSherlockValues(false);
         return true;
       }
       catch (Exception ex)
@@ -159,17 +166,72 @@ namespace SH8_Sample.ViewModels
         return false;
       }
     }
+
+
+    private void IntializeComponents()
+    {
+      SherlockAttributeList.Clear();
+      SherlockAttributeList.Add(new SherlockAttribute("avg grayscale")
+      {
+        Max = new SherlockReading("AvgPixMax"),
+        Min = new SherlockReading("AvgPixMin"),
+        Cur = new SherlockReading("AvgPixCur"),
+        Fail = new SherlockReading("AvgPixFail"),
+        Totals=this.Totals
+      });
+      SherlockAttributeList.Add(new SherlockAttribute("blob count")
+      {
+        Format = "#,##0",
+        Max = new SherlockReading("BlobsMax"),
+        Min = new SherlockReading("BlobsMin"),
+        Cur = new SherlockReading("BlobsCur"),
+        Fail = new SherlockReading("BlobsFail"),
+        Totals = this.Totals
+      });
+      SherlockAttributeList.Add(new SherlockAttribute("pass/fail")
+      {
+        Format = string.Empty,
+        Cur = new SherlockReading("Status"),
+        Totals = this.Totals
+      });
+    }
     private void GetSherlockValues()
+    {
+      GetSherlockValues(true);
+    }
+    private void GetSherlockValues(bool currentOnly)
     {
       if (HSh8 == null) { return; }
       try
       {
         // get the values from the engine and assign to properties which will update GUI
         // these Sherlock variables must exist. it will fail if you loaded a program without them
-        Total = (double)HSh8.value("total.value");
-        Pass = (double)HSh8.value("pass.value");
-        Fail = (double)HSh8.value("fail.value");
-        Attribute = ((double)HSh8.value("current.value"));
+
+        Totals.Overall = (double)HSh8.value("Total.value");
+        Totals.Pass = (double)HSh8.value("Pass.value");
+        Totals.Fail = (double)HSh8.value("Fail.value");
+      }
+      catch (Exception ex)
+      {
+        // don't crash on an error. show it
+        AssignStatusText($"{ex.Message}", 4);
+      }
+      foreach (var reading in SherlockAttributeList)
+      {
+        GetSherlockReading(reading.Cur);
+        GetSherlockReading(reading.Fail);
+        if (!currentOnly)
+        {
+          GetSherlockReading(reading.Max);
+          GetSherlockReading(reading.Min);
+        }
+      }
+    }
+    private void GetSherlockReading(SherlockReading? p)
+    {
+      try
+      {
+        if (p != null) { p.Value = HSh8?.value($"{p.VariableName}.value"); }
       }
       catch (Exception ex)
       {
@@ -183,13 +245,21 @@ namespace SH8_Sample.ViewModels
       try
       {
         // assign all properties to 0
-        Total = Pass = Fail = Attribute = 0;
+        Totals.Overall = Totals.Pass = Totals.Fail = 0;
         // assign the values to the engine
         // these Sherlock variables must exist. it will fail if you loaded a program without them
-        HSh8.setValue("total.value", Total);
-        HSh8.setValue("pass.value", Pass);
-        HSh8.setValue("fail.value", Fail);
-        HSh8.setValue("current.value", Attribute);
+        HSh8.setValue("Total.value", totals.Overall);
+        HSh8.setValue("Pass.value", Totals.Pass);
+        HSh8.setValue("Fail.value", Totals.Fail);
+        foreach (var reading in SherlockAttributeList)
+        {
+          if (reading.Fail is not null)
+          {
+            reading.Fail.Value = 0;
+            HSh8.setValue($"{reading.Fail.VariableName}.value", 0);
+          }
+        }
+
         // success
         AssignStatusText("Values reset");
       }
